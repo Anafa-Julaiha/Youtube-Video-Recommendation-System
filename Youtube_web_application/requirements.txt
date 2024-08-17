@@ -1,3 +1,12 @@
 streamlit
+scikit-learn
 pandas
-sklearn
+numpy
+sqlalchemy
+boto3
+googleapiclient
+mysql.connector
+gzip
+pickle
+streamlit_option_menu
+streamlit_multi_menu
