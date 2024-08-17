@@ -46,7 +46,4 @@ The recommendation system covers the following categories:
 - Travel
 - Songs
 
-## How to Run the Project
-1. **Clone the Repository**: 
-   ```bash
-   git clone https://github.com/yourusername/your-repo.git
+
