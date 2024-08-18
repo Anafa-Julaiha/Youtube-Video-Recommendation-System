@@ -29,7 +29,7 @@ This project is a YouTube video recommendation system that mimics the recommenda
 
 ### Deployment
 - **AWS Cloud**: The web application was deployed on an AWS Ubuntu server.
-- **Access**: You can access the application [here](http://43.205.96.146:8501/).
+- **Access**: You can access the application [here](http://3.109.153.63:8501/).
 
 ## Categories
 The recommendation system covers the following categories:
