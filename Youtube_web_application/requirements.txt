@@ -1,11 +1,5 @@
-streamlit==1.25.0
-pandas==2.1.1
-scikit-learn==1.2.2
-numpy==1.24.2
-sqlalchemy==2.0.20
-boto3==1.28.28
-google-api-python-client==2.94.0
-mysql-connector-python==8.1.0
-streamlit_option_menu==0.3.2
-streamlit-multi-menu==0.1.0
-
+streamlit
+scikit-learn
+pandas
+streamlit_option_menu
+streamlit_multi_menu
