@@ -1,5 +1,6 @@
 streamlit
 scikit-learn
+os
 pandas
 streamlit_option_menu
 streamlit_multi_menu
