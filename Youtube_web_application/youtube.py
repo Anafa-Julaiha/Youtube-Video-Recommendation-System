@@ -12,7 +12,7 @@ from streamlit_multi_menu import streamlit_multi_menu
 st.set_page_config(layout="wide")
 
 # Load the YouTube video data (replace with your own data)
-df = pd.read_pickle('Pickle_file')
+df = pd.read_pickle('Pickle_file.gz')
 
 # Replace NaN and inf values
 df[['likeCount', 'viewCount']] = df[['likeCount', 'viewCount']].fillna(0)  # Replace NaN with 0
