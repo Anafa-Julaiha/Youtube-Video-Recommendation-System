@@ -12,20 +12,24 @@ from streamlit_multi_menu import streamlit_multi_menu
 # Set wide layout mode
 st.set_page_config(layout="wide")
 
-df = 'Pickle_file.gz'
+file_path = 'Pickle_file.gz'
+
 if os.path.exists(file_path):
-    df = pd.read_pickle(file_path)
-
-
-# Replace NaN and inf values
-df[['likeCount', 'viewCount']] = df[['likeCount', 'viewCount']].fillna(0)  # Replace NaN with 0
-df[['likeCount', 'viewCount']] = df[['likeCount', 'viewCount']].replace([np.inf, -np.inf], 0)
-df['likeCount'] = df['likeCount'].astype(int)
-df['viewCount'] = df['viewCount'].astype(int)
-# Ensure that all tags are strings and replace NaN/None with an empty string
-df['tags'] = df['tags'].fillna('').astype(str)
-# Remove rows where 'tags' is still an empty string after preprocessing
-df = df[df['tags'].str.strip() != '']
+    try:
+        df = pd.read_pickle(file_path)
+        # Proceed with data cleaning
+        df[['likeCount', 'viewCount']] = df[['likeCount', 'viewCount']].fillna(0)
+        df[['likeCount', 'viewCount']] = df[['likeCount', 'viewCount']].replace([float('inf'), float('-inf')], 0)
+        df['likeCount'] = df['likeCount'].astype(int)
+        df['viewCount'] = df['viewCount'].astype(int)
+        # Ensure that all tags are strings and replace NaN/None with an empty string
+        df['tags'] = df['tags'].fillna('').astype(str)
+        # Remove rows where 'tags' is still an empty string after preprocessing
+        df = df[df['tags'].str.strip() != '']
+    except Exception as e:
+        st.error(f"An error occurred while loading the pickle file: {e}")
+else:
+    st.error(f"File {file_path} not found. Please ensure the file is available."
 
 def home_page():
     # Display the YouTube icon image
