@@ -2,6 +2,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import os
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from streamlit_option_menu import option_menu
@@ -11,8 +12,10 @@ from streamlit_multi_menu import streamlit_multi_menu
 # Set wide layout mode
 st.set_page_config(layout="wide")
 
-# Load the YouTube video data (replace with your own data)
-df = pd.read_pickle('Pickle_file.gz')
+file_path = 'Pickle_file.gz'
+if os.path.exists(file_path):
+    df = pd.read_pickle(file_path)
+
 
 # Replace NaN and inf values
 df[['likeCount', 'viewCount']] = df[['likeCount', 'viewCount']].fillna(0)  # Replace NaN with 0
