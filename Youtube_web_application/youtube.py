@@ -1,8 +1,8 @@
 
+
 import streamlit as st
 import pandas as pd
 import numpy as np
-import os
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from streamlit_option_menu import option_menu
@@ -12,24 +12,18 @@ from streamlit_multi_menu import streamlit_multi_menu
 # Set wide layout mode
 st.set_page_config(layout="wide")
 
-file_path = 'Pickle_file.gz'
+# Load the YouTube video data (replace with your own data)
+df = pd.read_pickle('Pickle_file.gz')
 
-if os.path.exists(file_path):
-    try:
-        df = pd.read_pickle(file_path)
-        # Proceed with data cleaning
-        df[['likeCount', 'viewCount']] = df[['likeCount', 'viewCount']].fillna(0)
-        df[['likeCount', 'viewCount']] = df[['likeCount', 'viewCount']].replace([float('inf'), float('-inf')], 0)
-        df['likeCount'] = df['likeCount'].astype(int)
-        df['viewCount'] = df['viewCount'].astype(int)
-        # Ensure that all tags are strings and replace NaN/None with an empty string
-        df['tags'] = df['tags'].fillna('').astype(str)
-        # Remove rows where 'tags' is still an empty string after preprocessing
-        df = df[df['tags'].str.strip() != '']
-    except Exception as e:
-        st.error(f"An error occurred while loading the pickle file: {e}")
-else:
-    st.error(f"File {file_path} not found. Please ensure the file is available."
+# Replace NaN and inf values
+df[['likeCount', 'viewCount']] = df[['likeCount', 'viewCount']].fillna(0)  # Replace NaN with 0
+df[['likeCount', 'viewCount']] = df[['likeCount', 'viewCount']].replace([np.inf, -np.inf], 0)
+df['likeCount'] = df['likeCount'].astype(int)
+df['viewCount'] = df['viewCount'].astype(int)
+# Ensure that all tags are strings and replace NaN/None with an empty string
+df['tags'] = df['tags'].fillna('').astype(str)
+# Remove rows where 'tags' is still an empty string after preprocessing
+df = df[df['tags'].str.strip() != '']
 
 def home_page():
     # Display the YouTube icon image
@@ -94,7 +88,7 @@ def search():
 
     if search_button and search_input:
         recommendations = recommend_videos(search_input, df, tag_vectors, vectorizer)
-        if recommendations.empty or (recommendations['title'].str.lower().str.contains(search_input.lower()).sum() == 0):  # Check if no recommendations were found
+        if recommendations.empty :  # Check if no recommendations were found
             st.subheader("No videos found related to your search.")
         else:
             for index, row in recommendations.iterrows():
@@ -178,4 +172,6 @@ elif selected == "Home":
     home_page()
 elif selected == "Category":
     category()
+
+
 
