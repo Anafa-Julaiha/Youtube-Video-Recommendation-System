@@ -12,7 +12,7 @@ from streamlit_multi_menu import streamlit_multi_menu
 # Set wide layout mode
 st.set_page_config(layout="wide")
 
-file_path = 'Pickle_file.gz'
+df = 'Pickle_file.gz'
 if os.path.exists(file_path):
     df = pd.read_pickle(file_path)
 
